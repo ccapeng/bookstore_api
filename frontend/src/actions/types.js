@@ -1,0 +1,36 @@
+let items = [
+  "SET_BOOKS",
+  "SET_BOOK",
+  "INIT_BOOK",
+  "SET_BOOK_VALUE",
+  "SET_BOOK_STATUS",
+  "SET_BOOK_DELETED",
+
+  "SET_CATEGORIES",
+  "SET_CATEGORY",
+  "INIT_CATEGORY",
+  "SET_CATEGORY_NAME",
+  "SET_CATEGORY_STATUS",
+  "SET_CATEGORY_DELETED",
+
+  "SET_PUBLISHERS",
+  "SET_PUBLISHER",
+  "INIT_PUBLISHER",
+  "SET_PUBLISHER_NAME",
+  "SET_PUBLISHER_STATUS",
+  "SET_PUBLISHER_DELETED",
+
+  "SET_AUTHORS",
+  "SET_AUTHOR",
+  "INIT_AUTHOR",
+  "SET_AUTHOR_VALUE",
+  "SET_AUTHOR_STATUS",
+  "SET_AUTHOR_DELETED"
+];
+
+let actions = {}
+for (let i = 0; i < items.length; i++) {
+  actions[items[i]] = items[i];
+}
+
+export const ACTIONS = actions;
