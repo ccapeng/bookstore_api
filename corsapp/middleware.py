@@ -8,7 +8,5 @@ class CorsMiddleware(object):
         response["Access-Control-Allow-Origin"] = "*"
         response["Access-Control-Allow-Headers"] = "*"
         response["Access-Control-Allow-Methods"] = "*"
-        #response["Access-Control-Allow-Methods"] = "GET, POST, DELETE, PATCH, DELETE"
-        #response["Allow"] = "GET, POST, DELETE, PATCH, DELETE"
 
         return response
