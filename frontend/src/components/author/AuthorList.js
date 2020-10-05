@@ -43,7 +43,7 @@ const Author = () => {
         {authors.map(author =>
           <li key={author.id} className="list-group-item d-flex">
             <div>
-              <Link to={`/author/${author.id}/`}>{author.last_name} {author.first_name}</Link>
+              <Link to={`/author/${author.id}/`}>{author.lastName}, {author.firstName}</Link>
             </div>
             <button
               className="btn btn-secondary ml-auto"
