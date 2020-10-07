@@ -59,9 +59,4 @@ const Author = () => {
 
 };
 
-// Author.propTypes = {
-//   getAuthors: PropTypes.func.isRequired,
-//   authors: PropTypes.array.isRequired
-// };
-
 export default Author;

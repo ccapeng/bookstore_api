@@ -173,7 +173,7 @@ const Book = props => {
                   <option value="0"> --- </option>
                   {authors.map(author =>
                     <option value={author.id} key={author.id}>
-                      {author.last_name} {author.first_name}
+                      {author.lastName} {author.firstName}
                     </option>
                   )}
                 </select>
