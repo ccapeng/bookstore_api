@@ -1,19 +1,21 @@
 import { ACTIONS } from "../actions/types";
 
-const initialBooksState = {
-  books: []
+const initialBookListState = {
+  bookList: []
 }
 
-export const books = (state = initialBooksState, action) => {
+export const bookList = (state = initialBookListState, action) => {
   switch (action.type) {
-    case ACTIONS.SET_BOOKS:
+    case ACTIONS.SET_BOOK_LIST:
       return {
-        books: action.payload
+        bookList: action.payload.sort(
+          function (a, b) { return a.title.toLowerCase() > b.title.toLowerCase() }
+        )
       }
     case ACTIONS.SET_BOOK_DELETED:
       return {
         ...state,
-        books: state.books.filter(book => book.id !== action.payload)
+        bookList: state.bookList.filter(book => book.id !== action.payload)
       }
     default:
       return state;
@@ -62,39 +64,6 @@ export const book = (state = initialBookState, action) => {
           ...action.payload
         }
       };
-
-    // case ACTIONS.SET_BOOK_TITLE:
-    //   return {
-    //     ...state,
-    //     book: {
-    //       ...state.book,
-    //       title: action.payload
-    //     }
-    //   };
-    // case ACTIONS.SET_BOOK_CATEGORY:
-    //   return {
-    //     ...state,
-    //     book: {
-    //       ...state.book,
-    //       category: action.payload
-    //     }
-    //   };
-    // case ACTIONS.SET_BOOK_PUBLISHER:
-    //   return {
-    //     ...state,
-    //     book: {
-    //       ...state.book,
-    //       publisher: action.payload
-    //     }
-    //   };
-    // case ACTIONS.SET_BOOK_AUTHOR:
-    //   return {
-    //     ...state,
-    //     book: {
-    //       ...state.book,
-    //       author: action.payload
-    //     }
-    //   };
 
     case ACTIONS.SET_BOOK:
       return {

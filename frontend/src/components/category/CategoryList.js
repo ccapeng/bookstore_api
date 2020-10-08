@@ -1,22 +1,21 @@
 import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories, deleteCategory } from '../../services/category';
-import { setCategories, setCategoryDeleted } from '../../actions/category';
+import { getCategoryList, deleteCategory } from '../../services/category';
+import { setCategoryList, setCategoryDeleted } from '../../actions/category';
 
 const CategoryList = () => {
 
-  const categories = useSelector(state => {
-    return state.categories.categories
+  const categoryList = useSelector(state => {
+    return state.categoryList.categoryList
   });
   const dispatch = useDispatch();
 
   useEffect(() => {
     const _fetch = async () => {
-      let data = await getCategories();
-      console.log("data categories", categories);
-      dispatch(setCategories(data));
+      let data = await getCategoryList();
+      console.log("data", data);
+      dispatch(setCategoryList(data));
     }
     _fetch();
   }, []);
@@ -39,7 +38,7 @@ const CategoryList = () => {
       </section>
       <section>
         <ul className="list-group mt-3">
-          {categories.map(category =>
+          {categoryList.map(category =>
             <li key={category.id} className="list-group-item d-flex">
               <div>
                 <Link to={`/category/${category.id}/`}>{category.name}</Link>
@@ -60,10 +59,5 @@ const CategoryList = () => {
     </div >
   )
 };
-
-// Category.propTypes = {
-//   getCategories: PropTypes.func.isRequired,
-//   categories: PropTypes.array.isRequired
-// };
 
 export default CategoryList;

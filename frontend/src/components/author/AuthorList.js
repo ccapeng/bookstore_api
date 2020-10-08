@@ -1,23 +1,21 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-import { getAuthors, deleteAuthor } from '../../services/author';
-import { setAuthors, setAuthorDeleted } from '../../actions/author';
+import { getAuthorList, deleteAuthor } from '../../services/author';
+import { setAuthorList, setAuthorDeleted } from '../../actions/author';
 
 
-const Author = () => {
+const AuthorList = () => {
 
-  const authors = useSelector(state => {
-    return state.authors.authors
+  const authorList = useSelector(state => {
+    return state.authorList.authorList
   });
   const dispatch = useDispatch();
 
   useEffect(() => {
     const _fetch = async () => {
-      let data = await getAuthors();
-      dispatch(setAuthors(data));
+      let data = await getAuthorList();
+      dispatch(setAuthorList(data));
     }
     _fetch();
   }, []);
@@ -40,7 +38,7 @@ const Author = () => {
         <Link to="/author/add/" className="ml-auto">Add Author</Link>
       </section>
       <ul className="list-group mt-5">
-        {authors.map(author =>
+        {authorList.map(author =>
           <li key={author.id} className="list-group-item d-flex">
             <div>
               <Link to={`/author/${author.id}/`}>{author.lastName}, {author.firstName}</Link>
@@ -59,4 +57,4 @@ const Author = () => {
 
 };
 
-export default Author;
+export default AuthorList;

@@ -1,8 +1,8 @@
 import { ACTIONS } from "../actions/types";
 
-export const setPublishers = (data) => {
+export const setPublisherList = (data) => {
   return {
-    type: ACTIONS.SET_PUBLISHERS,
+    type: ACTIONS.SET_PUBLISHER_LIST,
     payload: data
   }
 }

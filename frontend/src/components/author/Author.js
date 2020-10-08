@@ -96,9 +96,4 @@ const Author = props => {
   )
 };
 
-// AuthorEditor.propTypes = {
-//   getCategories: PropTypes.func.isRequired,
-//   categories: PropTypes.array.isRequired
-// };
-
 export default Author;

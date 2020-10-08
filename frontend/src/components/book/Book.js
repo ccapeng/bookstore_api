@@ -3,12 +3,12 @@ import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { saveBook, getBook } from '../../services/book';
 import { setBook, initBook, setBookValue, setBookStatus } from '../../actions/book';
-import { getCategories } from '../../services/category';
-import { getPublishers } from '../../services/publisher';
-import { getAuthors } from '../../services/author';
-import { setCategories } from '../../actions/category';
-import { setPublishers } from '../../actions/publisher';
-import { setAuthors } from '../../actions/author';
+import { getCategoryList } from '../../services/category';
+import { getPublisherList } from '../../services/publisher';
+import { getAuthorList } from '../../services/author';
+import { setCategoryList } from '../../actions/category';
+import { setPublisherList } from '../../actions/publisher';
+import { setAuthorList } from '../../actions/author';
 
 const Book = props => {
 
@@ -21,14 +21,14 @@ const Book = props => {
     return state.book
   });
 
-  const categories = useSelector(state => {
-    return state.categories.categories
+  const categoryList = useSelector(state => {
+    return state.categoryList.categoryList
   });
-  const publishers = useSelector(state => {
-    return state.publishers.publishers
+  const publisherList = useSelector(state => {
+    return state.publisherList.publisherList
   });
-  const authors = useSelector(state => {
-    return state.authors.authors
+  const authorList = useSelector(state => {
+    return state.authorList.authorList
   });
 
   const dispatch = useDispatch();
@@ -70,8 +70,8 @@ const Book = props => {
 
   useEffect(() => {
     const _fetch = async () => {
-      let data = await getCategories();
-      dispatch(setCategories(data));
+      let data = await getCategoryList();
+      dispatch(setCategoryList(data));
       setCategoryReady(true);
     }
     _fetch()
@@ -79,8 +79,8 @@ const Book = props => {
 
   useEffect(() => {
     const _fetch = async () => {
-      let data = await getPublishers();
-      dispatch(setPublishers(data));
+      let data = await getPublisherList();
+      dispatch(setPublisherList(data));
       setPublisherReady(true);
     }
     _fetch()
@@ -88,8 +88,8 @@ const Book = props => {
 
   useEffect(() => {
     const _fetch = async () => {
-      let data = await getAuthors();
-      dispatch(setAuthors(data));
+      let data = await getAuthorList();
+      dispatch(setAuthorList(data));
       setAuthorReady(true);
     }
     _fetch()
@@ -138,7 +138,7 @@ const Book = props => {
                   value={book.category}
                 >
                   <option value="0"> --- </option>
-                  {categories.map(category =>
+                  {categoryList.map(category =>
                     <option value={category.id} key={category.id}>
                       {category.name}
                     </option>
@@ -155,7 +155,7 @@ const Book = props => {
                   value={book.publisher}
                 >
                   <option value="0"> --- </option>
-                  {publishers.map(publisher =>
+                  {publisherList.map(publisher =>
                     <option value={publisher.id} key={publisher.id}>
                       {publisher.name}
                     </option>
@@ -171,7 +171,7 @@ const Book = props => {
                   onChange={event => onChangeBook(event.target.name, event.target.value)}
                 >
                   <option value="0"> --- </option>
-                  {authors.map(author =>
+                  {authorList.map(author =>
                     <option value={author.id} key={author.id}>
                       {author.lastName} {author.firstName}
                     </option>

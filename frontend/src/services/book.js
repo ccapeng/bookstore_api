@@ -1,38 +1,20 @@
-import axios from "axios";
+import Request from "./request";
 
-function getConfig() {
-  return {
-    headers: {
-      "Content-Type": "application/json"
-    },
-  };
-}
+export const getBookList = () => {
 
-export const getBooks = async () => {
-
-  try {
-    let result = await axios.get("api/book/get_all/", getConfig());
-    return Promise.resolve(result.data);
-  } catch (error) {
-    console.log(error);
-    return Promise.reject("get error");
-  }
+  let url = "api/book/get_all/";
+  return Request.get(url);
 
 }
 
-export const getBook = async (bookId, callback) => {
+export const getBook = (bookId) => {
 
-  try {
-    let result = await axios.get(`api/book/${bookId}/`, getConfig());
-    return Promise.resolve(result.data);
-  } catch (error) {
-    console.log(error);
-    return Promise.reject("get error");
-  }
+  let url = `api/book/${bookId}/`;
+  return Request.get(url);
 
 }
 
-export const saveBook = async (book) => {
+export const saveBook = (book) => {
   if (book.category === 0) {
     book.category = "";
   }
@@ -43,51 +25,21 @@ export const saveBook = async (book) => {
     book.author = "";
   }
   if (book.id === 0) {
-
-    try {
-      let body = JSON.stringify(book);
-      let result = await axios.post("api/book/", body, getConfig());
-      if (result.status === 201) {
-        return Promise.resolve(result.data);
-      } else {
-        return Promise.reject(result.data);
-      }
-    } catch (error) {
-      console.log(error);
-      return Promise.reject("save error");
-    }
-
+    book.id = "";
+    const body = JSON.stringify(book);
+    let url = "api/book/";
+    return Request.create(url, body);
   } else {
-
-    try {
-      let body = JSON.stringify(book);
-      let result = await axios.patch(`api/book/${book.id}/`, body, getConfig());
-      if (result.status === 200) {
-        return Promise.resolve(result.data);
-      } else {
-        return Promise.reject(result.data);
-      }
-    } catch (error) {
-      console.log(error);
-      return Promise.reject("save error");
-    }
-
+    const body = JSON.stringify(book);
+    let url = `api/book/${book.id}/`;
+    return Request.update(url, body);
   }
 
 }
 
-export const deleteBook = async (bookId) => {
+export const deleteBook = (bookId) => {
 
-  try {
-    let result = await axios.delete(url, getConfig());
-    if (result.status === 204) {
-      return Promise.resolve("deleted");
-    } else {
-      return Promise.reject("failed");
-    }
-  } catch (error) {
-    console.log(error);
-    return Promise.reject("Delete Error");
-  }
+  let url = `api/book/${bookId}/`;
+  return Request.delete(url);
 
 }

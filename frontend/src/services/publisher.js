@@ -1,85 +1,36 @@
-import axios from "axios";
+import Request from "./request";
 
-function getConfig() {
-  return {
-    headers: {
-      "Content-Type": "application/json"
-    },
-  };
-}
+export const getPublisherList = () => {
 
-export const getPublishers = async () => {
-
-  try {
-    let result = await axios.get("api/publisher/", getConfig());
-    return Promise.resolve(result.data);
-  } catch (error) {
-    console.log(error);
-    return Promise.reject("get error");
-  }
+  let url = "api/publisher/";
+  return Request.get(url);
 
 }
 
-export const getPublisher = async (publisherId) => {
+export const getPublisher = (publisherId) => {
 
-  try {
-    let result = await axios.get(`api/publisher/${publisherId}/`, getConfig());
-    return Promise.resolve(result.data);
-  } catch (error) {
-    console.log(error);
-    return Promise.reject("get error");
-  }
+  let url = `api/publisher/${publisherId}/`;
+  return Request.get(url);
 
 }
 
-export const savePublisher = async (publisher) => {
+export const savePublisher = (publisher) => {
 
   if (publisher.id === 0) {
     const body = JSON.stringify({ name: publisher.name });
-
-    try {
-      let result = await axios.post("api/publisher/", body, getConfig());
-      if (result.status === 201) {
-        return Promise.resolve(result.data);
-      } else {
-        return Promise.reject(result.data);
-      }
-    } catch (error) {
-      console.log(error);
-      return Promise.reject("save error");
-    }
-
+    let url = "api/publisher/";
+    return Request.create(url, body);
   } else {
-
     const body = JSON.stringify(publisher);
-    try {
-      let result = await axios.patch(`api/publisher/${publisher.id}/`, body, getConfig());
-      if (result.status === 200) {
-        return Promise.resolve(result.data);
-      } else {
-        return Promise.reject(result.data);
-      }
-    } catch (error) {
-      console.log(error);
-      return Promise.reject("Save Error");
-    }
-
+    let url = `api/publisher/${publisher.id}/`;
+    return Request.update(url, body);
   }
 
 }
 
-export const deletePublisher = async (publisherId) => {
+export const deletePublisher = (publisherId) => {
 
-  try {
-    let result = await axios.delete(`api/publisher/${publisherId}/`, getConfig());
-    if (result.status === 204) {
-      return Promise.resolve("deleted");
-    } else {
-      return Promise.reject("failed");
-    }
-  } catch (error) {
-    console.log(error);
-    return Promise.reject("Delete Error");
-  }
+  let url = `api/publisher/${publisherId}/`;
+  return Request.delete(url);
 
 }

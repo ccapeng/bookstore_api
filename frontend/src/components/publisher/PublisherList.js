@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getPublishers, deletePublisher } from '../../services/publisher';
-import { setPublishers, setPublisherDeleted } from '../../actions/publisher';
+import { getPublisherList, deletePublisher } from '../../services/publisher';
+import { setPublisherList, setPublisherDeleted } from '../../actions/publisher';
 
 const PublisherList = () => {
 
-  const publishers = useSelector(state => {
-    return state.publishers.publishers
+  const publisherList = useSelector(state => {
+    return state.publisherList.publisherList
   });
   const dispatch = useDispatch();
 
   useEffect(() => {
     const _fetch = async () => {
-      let data = await getPublishers();
-      console.log("data", data);
-      dispatch(setPublishers(data));
+      let data = await getPublisherList();
+      dispatch(setPublisherList(data));
     }
     _fetch();
   }, []);
@@ -38,7 +37,7 @@ const PublisherList = () => {
         <Link to="/publisher/add/" className="ml-auto">Add Publisher</Link>
       </section>
       <ul className="list-group mt-5">
-        {publishers.map(publisher =>
+        {publisherList.map(publisher =>
           <li key={publisher.id} className="list-group-item d-flex">
             <Link to={`/publisher/${publisher.id}/`}>
               {publisher.name}

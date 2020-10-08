@@ -18,6 +18,7 @@ const App = () => {
         <Header />
         <div className="container mt-5">
           <Switch>
+            <Route exact path="/" component={BookList} />
             <Route exact path="/books/" component={BookList} />
             <Route exact path="/book/add/" component={Book} />
             <Route exact path="/book/:id/" component={Book} />

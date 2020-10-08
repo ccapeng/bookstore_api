@@ -1,19 +1,21 @@
 import { ACTIONS } from "../actions/types";
 
-const initialCategoriesState = {
-  categories: []
+const initialCategoryListState = {
+  categoryList: []
 }
 
-export const categories = (state = initialCategoriesState, action) => {
+export const categoryList = (state = initialCategoryListState, action) => {
   switch (action.type) {
-    case ACTIONS.SET_CATEGORIES:
+    case ACTIONS.SET_CATEGORY_LIST:
       return {
-        categories: action.payload
+        categoryList: action.payload.sort(
+          function (a, b) { return a.name.toLowerCase() > b.name.toLowerCase() }
+        )
       }
     case ACTIONS.SET_CATEGORY_DELETED:
       return {
         ...state,
-        categories: state.categories.filter(category => category.id !== action.payload)
+        categoryList: state.categoryList.filter(category => category.id !== action.payload)
       }
     default:
       return state;

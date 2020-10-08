@@ -1,8 +1,8 @@
 import { ACTIONS } from "../actions/types";
 
-export const setBooks = (data) => {
+export const setBookList = (data) => {
   return {
-    type: ACTIONS.SET_BOOKS,
+    type: ACTIONS.SET_BOOK_LIST,
     payload: data
   }
 }

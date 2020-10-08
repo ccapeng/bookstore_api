@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
-
 import { useDispatch, useSelector } from "react-redux";
-import { getBooks, deleteBook } from '../../services/book';
-import { setBooks, setBookDeleted } from '../../actions/book';
+import { getBookList, deleteBook } from '../../services/book';
+import { setBookList, setBookDeleted } from '../../actions/book';
 
 const BookList = () => {
 
-  const books = useSelector(state => {
-    return state.books.books
+  const bookList = useSelector(state => {
+    return state.bookList.bookList
   });
+  console.log("bookList", bookList);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const _fetch = async () => {
-      let data = await getBooks();
-      dispatch(setBooks(data));
+      let data = await getBookList();
+      dispatch(setBookList(data));
     }
     _fetch();
   }, []);
@@ -48,7 +47,7 @@ const BookList = () => {
           </tr>
         </thead>
         <tbody>
-          {books.map(book =>
+          {bookList.map(book =>
             <tr key={book.id}>
               <td>
                 <Link to={`/book/${book.id}/`}>{book.title}</Link>
@@ -66,7 +65,7 @@ const BookList = () => {
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={() => { onDeleteBook(book.id, resetBooks) }}
+                  onClick={() => { onDeleteBook(book.id) }}
                 >
                   Delete
                 </button>
@@ -78,10 +77,5 @@ const BookList = () => {
     </div>
   )
 };
-
-// Book.propTypes = {
-//   getBooks: PropTypes.func.isRequired,
-//   books: PropTypes.array.isRequired
-// };
 
 export default BookList;

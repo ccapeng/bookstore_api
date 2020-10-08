@@ -10,7 +10,7 @@ class Category(models.Model):
 
 class Publisher(models.Model):
     name = models.CharField(max_length=32)
-
+    #type “government”, “standards-body”, “university”, “commercial”, “foundation”, “private”, “corporate”
     def __str__(self):
         return self.name
 

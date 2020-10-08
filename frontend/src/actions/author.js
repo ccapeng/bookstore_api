@@ -1,8 +1,8 @@
 import { ACTIONS } from "../actions/types";
 
-export const setAuthors = (data) => {
+export const setAuthorList = (data) => {
   return {
-    type: ACTIONS.SET_AUTHORS,
+    type: ACTIONS.SET_AUTHOR_LIST,
     payload: data
   }
 }

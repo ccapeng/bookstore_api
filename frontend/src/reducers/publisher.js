@@ -1,19 +1,21 @@
 import { ACTIONS } from "../actions/types";
 
-const initialPublishersState = {
-  publishers: []
+const initialPublisherListState = {
+  publisherList: []
 }
 
-export const publishers = (state = initialPublishersState, action) => {
+export const publisherList = (state = initialPublisherListState, action) => {
   switch (action.type) {
-    case ACTIONS.SET_PUBLISHERS:
+    case ACTIONS.SET_PUBLISHER_LIST:
       return {
-        publishers: action.payload
+        publisherList: action.payload.sort(
+          function (a, b) { return a.name.toLowerCase() > b.name.toLowerCase() }
+        )
       }
     case ACTIONS.SET_PUBLISHER_DELETED:
       return {
         ...state,
-        publishers: state.publishers.filter(publisher => publisher.id !== action.payload)
+        publisherList: state.publisherList.filter(publisher => publisher.id !== action.payload)
       }
     default:
       return state;

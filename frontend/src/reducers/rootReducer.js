@@ -1,16 +1,16 @@
 import { combineReducers } from "redux";
-import { categories, category } from "./category";
-import { publishers, publisher } from "./publisher";
-import { authors, author } from "./author";
-import { books, book } from "./book";
+import { categoryList, category } from "./category";
+import { publisherList, publisher } from "./publisher";
+import { authorList, author } from "./author";
+import { bookList, book } from "./book";
 
 export const rootReducer = combineReducers({
-  categories,
+  categoryList,
   category,
-  publishers,
+  publisherList,
   publisher,
-  authors,
+  authorList,
   author,
-  books,
+  bookList,
   book
 })
