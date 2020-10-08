@@ -19,8 +19,8 @@
 - To start frontend,
 	- Make sure `npm` installed.
 	- Run `npm install` to install all react dependency modules.
-	- To start server, run `npm start`.   
-		You should see browser open at localhost:3000
+	- To deploy react js, run `npm run dev`. See package.json for the deployment.
+	- The react js file is deployed to frontend/static/frontend/main.js
 		
 - This backend server also serve for
 	- React hook redux project [https://github.com/ccapeng/bookstore-hook-redux](https://github.com/ccapeng/bookstore-hook-redux)
