@@ -16,13 +16,25 @@ class PublisherSerializer(serializers.ModelSerializer):
 
 
 class AuthorSerializer(serializers.ModelSerializer):
-    #lastName = serializers.CharField(source='last_name')
-    #firstName = serializers.CharField(source='first_name')
 
     class Meta:
         model = Author
         fields = '__all__'
-        #read_only_fields = ('last_name', 'first_name')
+
+    def validate(self, data):
+        """
+        Check that start is before finish.
+        """
+        first_name = data["first_name"]
+        last_name = data["last_name"]
+
+        query = Author.objects.filter(
+            first_name=first_name, last_name=last_name)
+        authors = query.all()
+
+        if len(authors) > 0:
+            raise serializers.ValidationError("Author already exist")
+        return data
 
 
 class BookSerializer(serializers.ModelSerializer):
