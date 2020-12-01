@@ -53,13 +53,13 @@ const BookList = () => {
                 <Link to={`/book/${book.id}/`}>{book.title}</Link>
               </td>
               <td>
-                {book.category}
+                {book.categoryName}
               </td>
               <td>
-                {book.publisher}
+                {book.publisherName}
               </td>
               <td>
-                {book.author}
+                {book.authorFirstName} {book.authorLastName}
               </td>
               <td>
                 <button

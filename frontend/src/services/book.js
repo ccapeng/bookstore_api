@@ -2,7 +2,7 @@ import Request from "./request";
 
 export const getBookList = () => {
 
-  let url = "api/book/get_all/";
+  let url = "api/book/";
   return Request.get(url);
 
 }

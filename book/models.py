@@ -27,7 +27,6 @@ class Author(models.Model):
     def name(self):
         return self.last_name + " " + self.first_name
 
-
 class Book(models.Model):
     title = models.CharField(max_length=255)
     category = models.ForeignKey(
